@@ -1,0 +1,9 @@
+[Unit]
+Description=Update pacman mirrors using reflector every Friday.
+
+[Timer]
+OnCalendar=Fri *-*-* 0:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
