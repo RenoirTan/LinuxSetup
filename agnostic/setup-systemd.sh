@@ -1,5 +1,5 @@
 source ../utils.sh
 
-cp /etc/systemd/logind.conf /etc/systemd/logind.conf.lxspold
+lxspr_backup /etc/systemd/logind.conf
 lxspr_cp /etc/systemd/logind.conf
 

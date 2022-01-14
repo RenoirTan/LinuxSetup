@@ -1,4 +1,4 @@
 source ../utils.sh
 
-mv /etc/systemd/logind.conf.lxspold /etc/systemd/logind.conf
+lxspr_restore /etc/systemd/logind.conf
 
