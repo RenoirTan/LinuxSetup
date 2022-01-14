@@ -52,7 +52,9 @@ lxspr_backup() {
 }
 
 lxsp_backup() {
-	[[ -f "$1" || -d "$1" ]] && cp -r "$1" "$1.old"
+	src="$HOME/$1"
+	dest="$src.old"
+	[[ -f "$src" || -d "$src" ]] && cp -r "$src" "$dest"
 }
 
 lxspr_replace() {
@@ -70,6 +72,8 @@ lxspr_restore() {
 }
 
 lxsp_restore() {
-	[[ -f "$1.old" || -d "$1.old" ]] && mv "$1.old" "$1"
+	src="$HOME/$1"
+	dest="$src.old"
+	[[ -f "$src" || -d "$src" ]] && mv "$src" "$dest"
 }
 
