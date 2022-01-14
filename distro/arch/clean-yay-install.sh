@@ -1,4 +1,4 @@
 source ../../utils.sh
 
-rm -rf "$HOME/Code/aur.archlinux.org/yay"
+lxsp_rm "Code/aur.archlinux.org/yay"
 

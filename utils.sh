@@ -7,35 +7,52 @@ lxsp_path() {
 }
 
 lxspr_cp() {
-	cp -r "$(lxspr_path $1)" "$1"
+	src="$(lxspr_path $1)"
+	[[ -f "$src" || -d "$src" ]] && cp -r "$src" "$1"
 }
 
 lxsp_cp() {
-	cp -r "$(lxsp_path $1)" "$HOME/$1"
+	src="$(lxsp_path $1)"
+	[[ -f "$src" || -d "$src" ]] && cp -r "$src" "$HOME/$1"
 }
 
 lxspr_mv() {
-	mv "$(lxspr_path $1)" "$1"
+	src="$(lxspr_path $1)"
+	[[ -f "$src" || -d "$src" ]] && mv "$src" "$1"
 }
 
 lxsp_mv() {
-	mv "$(lxsp_path $1)" "$HOME/$1"
+	src="$(lxsp_path $1)"
+	[[ -f "$src" || -d "$src" ]] && mv "$src" "$HOME/$1"
+}
+
+lxspr_rm() {
+	target="$(lxspr_path $1)"
+	[[ -f "$target" || -d "$target" ]] && rm -rf "$target"
+}
+
+lxsp_rm() {
+	target="$HOME/$(lxsp_path $1)"
+	[[ -f "$target" || -d "$target" ]] && rm -rf "$target"
 }
 
 lxspr_echof() {
-	echo "$(lxspr_path $1)" "$1"
+    src="$(lxspr_path $1)"
+	[[ -f "$src" || -d "$src" ]] && echo "$src" "$1"
+
 }
 
 lxsp_echof() {
-	echo "$(lxsp_path $1)" "$HOME/$1"
+	src="$HOME/$(lxsp_path $1)"
+	[[ -f "$src" || -d "$src" ]] && echo "$(lxsp_path $1)" "$HOME/$1"
 }
 
 lxspr_backup() {
-	cp -r "$1" "$1.old"
+	[[ -f "$1" || -d "$1" ]] && cp -r "$1" "$1.old"
 }
 
 lxsp_backup() {
-	cp -r "$1" "$1.old"
+	[[ -f "$1" || -d "$1" ]] && cp -r "$1" "$1.old"
 }
 
 lxspr_replace() {
@@ -49,10 +66,10 @@ lxsp_replace() {
 }
 
 lxspr_restore() {
-	mv "$1.old" "$1"
+	[[ -f "$1.old" || -d "$1.old" ]] && mv "$1.old" "$1"
 }
 
 lxsp_restore() {
-	mv "$1.old" "$1"
+	[[ -f "$1.old" || -d "$1.old" ]] && mv "$1.old" "$1"
 }
 

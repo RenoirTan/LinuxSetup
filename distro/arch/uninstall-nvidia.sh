@@ -2,7 +2,7 @@ source ../../utils.sh
 
 pacman -Rns nvidia
 
-rm /etc/pacman.d/hooks/nvidia.hook
+lxspr_rm /etc/pacman.d/hooks/nvidia.hook
 
 mkinitcpio -P
 

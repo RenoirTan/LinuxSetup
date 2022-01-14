@@ -1,6 +1,6 @@
 source ../utils.sh
 
-rm -rf "$HOME/.vimrc"
-rm -rf "$HOME/.config/nvim"
-rm -rf "$HOME/.local/share/nvim"
+lxsp_rm "$HOME/.vimrc"
+lxsp_rm "$HOME/.config/nvim"
+lxsp_rm "$HOME/.local/share/nvim"
 
