@@ -7,11 +7,11 @@ lxsp_path() {
 }
 
 lxspr_cp() {
-	cp "$(lxspr_path $1)" "$1"
+	cp -r "$(lxspr_path $1)" "$1"
 }
 
 lxsp_cp() {
-	cp "$(lxsp_path $1)" "$HOME/$1"
+	cp -r "$(lxsp_path $1)" "$HOME/$1"
 }
 
 lxspr_mv() {
