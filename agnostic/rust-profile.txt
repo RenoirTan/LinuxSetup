@@ -1,0 +1,7 @@
+
+# Rust
+export RUST_HOME="$HOME/.rust"
+export RUSTUP_HOME="$RUST_HOME/rustup"
+export CARGO_HOME="$RUST_HOME/cargo"
+[[ -f "$CARGO_HOME/env" ]] && source "$CARGO_HOME/env"
+
