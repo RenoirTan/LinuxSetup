@@ -1,4 +1,4 @@
-source ../utils.sh
+source ../../utils.sh
 
 # I could have stored the command in a variable and used exec as yay is
 # CLI-compatible with pacman.
