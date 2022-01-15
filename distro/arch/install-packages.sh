@@ -30,7 +30,7 @@ for collection in $@; do
 			echo "Skipping $collection because yay has not been installed."
 			continue
 		fi
-		sudo pacman -Syuv - < "$colfile"
+		pacman -Syuv - < "$colfile"
 	fi
 done
 
