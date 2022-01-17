@@ -1,0 +1,8 @@
+qemu
+qemu-arch-extra
+libvirt
+iptables-nft
+dnsmasq
+dmidecode
+bridge-utils
+openbsd-netcat
