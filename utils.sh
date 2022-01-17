@@ -1,3 +1,17 @@
+lxsp_guess_init() {
+	if [[ $(/sbin/init --version) =~ "upstart" ]]; then
+		echo -n "upstart"
+	elif [[ -d "/run/systemd/system" ]]; then
+		echo -n "systemd"
+	elif [[ -f /etc/init.d/cron && ! -h /etc/init.d/cron ]]; then
+		echo -n "SysVinit"
+	fi
+}
+
+lxsp_detect_init() {
+	[[ $(lxsp_guess_init) == "$1" ]] && echo -n "1" || echo -n "0"
+}
+
 lxspr_path() {
 	echo -n "fs$1"
 }
