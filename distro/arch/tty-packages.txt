@@ -1,4 +1,8 @@
 acpi
+alsa
+alsa-firmware
+alsa-ucm-conf
+alsa-utils
 base-devel
 dosfstools
 efibootmgr
@@ -15,6 +19,7 @@ neovim
 networkmanager
 ntfs-3g
 os-prober
+pulseaudio
 reflector
 sof-firmware
 sudo
