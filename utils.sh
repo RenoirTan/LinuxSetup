@@ -1,3 +1,31 @@
+lxsp_command_exists() {
+	if command -v "$1" > /dev/null ; then
+		echo "1"
+	else
+		echo "0"
+	fi
+}
+
+lxsp_path_exists() {
+	[[ -f "$1" || -d "$1" ]] && echo "1" || echo "0"
+}
+
+lxsp_split_str() {
+	echo $1 | tr "$2" "\n"
+}
+
+# DO NOT USE
+# DUMB BEHAVIOUR FROM SHELL WITH NO MEANINGFUL RECOURSE
+lxsp_command_check() {
+	for executable in $(lxsp_split_str "$1" "$2"); do
+		if [ $(lxsp_command_exists "$executable") == "0" ]; then
+			echo "0"
+			return
+		fi
+	done
+	echo "1"
+}
+
 lxsp_guess_init() {
 	if [[ $(/sbin/init --version) =~ "upstart" ]]; then
 		echo -n "upstart"
@@ -90,4 +118,3 @@ lxsp_restore() {
 	dest="$src.old"
 	[[ -f "$src" || -d "$src" ]] && mv "$src" "$dest"
 }
-
