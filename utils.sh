@@ -50,21 +50,29 @@ lxsp_path() {
 
 lxspr_cp() {
 	src="$(lxspr_path $1)"
+	end_dir="$(dirname $1)"
+	[[ ! -d "$end_dir" ]] && mkdir -p "$end_dir"
 	[[ -f "$src" || -d "$src" ]] && cp -r "$src" "$1"
 }
 
 lxsp_cp() {
 	src="$(lxsp_path $1)"
+	end_dir="$HOME/$(dirname $1)"
+	[[ ! -d "$end_dir" ]] && mkdir -p "$end_dir"
 	[[ -f "$src" || -d "$src" ]] && cp -r "$src" "$HOME/$1"
 }
 
 lxspr_mv() {
 	src="$(lxspr_path $1)"
+	end_dir="$(dirname $1)"
+	[[ ! -d "$end_dir" ]] && mkdir -p "$end_dir"
 	[[ -f "$src" || -d "$src" ]] && mv "$src" "$1"
 }
 
 lxsp_mv() {
 	src="$(lxsp_path $1)"
+	end_dir="$HOME/$(dirname $1)"
+	[[ ! -d "$end_dir" ]] && mkdir -p "$end_dir"
 	[[ -f "$src" || -d "$src" ]] && mv "$src" "$HOME/$1"
 }
 
