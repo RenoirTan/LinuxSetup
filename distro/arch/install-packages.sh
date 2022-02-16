@@ -5,16 +5,20 @@ source ../../utils.sh
 # However zsh keeps crashing whenever I try to use exec.
 
 command -v pacman > /dev/null && pacman_installed=1
-command -v yay > /dev/null && yay_installed=1
+aur_helper=""
+command -v yay > /dev/null && aur_helper=yay
+command -v paru > /dev/null && aur_helper=paru
 
-if [ "$yay_installed" != 1 ]; then
-	echo "Warning! Yay has not been installed yet."
+if [ "$aur_helper" == "" ]; then
+	echo "Warning! A suitable AUR helper has not been installed yet."
+	echo "You can install either yay or paru to install packages from the AUR."
 	echo "Run 'setup distro/arch/install-yay.sh' to install yay."
 fi
 
-if [ "$pacman_installed" != 1 && "$yay_installed" != 1 ]; then
+if [ "$pacman_installed" != 1 && "$aur_helper" == "" ]; then
 	echo "No supported package managers found."
-	echo "Please install either pacman or yay."
+	echo "Please install one of the available package managers for Arch Linux, especially pacman."
+	echo "Supported AUR helpers: yay, paru"
 fi
 
 for collection in $@; do
@@ -23,8 +27,8 @@ for collection in $@; do
 		echo "Skipping $collection because $colfile does not exist."
 		continue
 	fi
-	if [ "$yay_installed" == 1 ]; then
-		yay -Syuv - < "$colfile"
+	if [ "$aur_helper" != "" ]; then
+		$aur_helper -Syuv - < "$colfile"
 	else
 		if [ "$collection" == "yay" ]; then
 			echo "Skipping $collection because yay has not been installed."
