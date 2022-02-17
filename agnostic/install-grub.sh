@@ -58,3 +58,6 @@ else
     echo "Invalid answer for TPM!"
     exit 1
 fi
+
+grub-mkconfig -o /boot/grub/grub.cfg
+
