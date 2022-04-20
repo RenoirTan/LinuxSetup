@@ -33,3 +33,5 @@ wireless_tools
 wpa_supplicant
 zip
 zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
