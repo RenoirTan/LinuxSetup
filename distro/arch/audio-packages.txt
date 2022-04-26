@@ -1,0 +1,10 @@
+sof-firmware
+alsa
+alsa-firmware
+alsa-ucm-conf
+alsa-utils
+pipewire
+lib32-pipewire
+wireplumber
+pipewire-alsa
+pipewire-pulse
