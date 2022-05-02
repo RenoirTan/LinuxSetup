@@ -4,7 +4,6 @@ dolphin-plugins
 filelight
 gwenview
 kate
-kcalc
 kcharselect
 konsole
 kwave
@@ -21,3 +20,6 @@ powerdevil
 sddm
 sddm-kcm
 spectacle
+libappindicator-gtk3
+appmenu-gtk-module
+qalculate-qt
