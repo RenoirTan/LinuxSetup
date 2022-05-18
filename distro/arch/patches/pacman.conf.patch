@@ -1,0 +1,28 @@
+--- pacman.conf	2022-05-18 21:36:12.729667153 +0800
++++ pacman.conf.new	2022-05-18 21:29:04.448319438 +0800
+@@ -30,11 +30,11 @@
+ 
+ # Misc options
+ #UseSyslog
+-#Color
++Color
+ #NoProgressBar
+ CheckSpace
+-#VerbosePkgLists
+-#ParallelDownloads = 5
++VerbosePkgLists
++ParallelDownloads = 10
+ 
+ # By default, pacman accepts packages signed by keys that its local keyring
+ # trusts (see pacman-key and its man page), as well as unsigned packages.
+@@ -90,8 +90,8 @@
+ #[multilib-testing]
+ #Include = /etc/pacman.d/mirrorlist
+ 
+-#[multilib]
+-#Include = /etc/pacman.d/mirrorlist
++[multilib]
++Include = /etc/pacman.d/mirrorlist
+ 
+ # An example of a custom package repository.  See the pacman manpage for
+ # tips on creating your own repositories.
