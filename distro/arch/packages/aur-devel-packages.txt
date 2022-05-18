@@ -1,0 +1,3 @@
+git-credential-manager
+gitahead
+visual-studio-code-bin

@@ -1,3 +1,0 @@
-system76-power
-tor-browser
-visual-studio-code-bin

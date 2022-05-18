@@ -1,0 +1,6 @@
+octopi
+alpm_octopi_utils
+octopi-notifier-framework
+kclock
+lightly-qt
+systemd-kcm

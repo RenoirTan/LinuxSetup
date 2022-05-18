@@ -1,6 +1,0 @@
-discord
-firefox
-gimp
-mesa
-mesa-utils
-noto-fonts-sc

@@ -1,0 +1,4 @@
+plymouth
+plymouth-kcm
+plymouth-theme-hexagon-dots-git
+shim-signed

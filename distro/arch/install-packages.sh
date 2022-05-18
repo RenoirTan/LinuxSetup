@@ -15,14 +15,14 @@ if [ "$aur_helper" == "" ]; then
 	echo "Run 'setup distro/arch/install-yay.sh' to install yay."
 fi
 
-if [ "$pacman_installed" != 1 && "$aur_helper" == "" ]; then
+if [ "$pacman_installed" != 1 ] && [ "$aur_helper" == "" ]; then
 	echo "No supported package managers found."
 	echo "Please install one of the available package managers for Arch Linux, especially pacman."
 	echo "Supported AUR helpers: yay, paru"
 fi
 
 for collection in $@; do
-	colfile="./$collection-packages.txt"
+	colfile="./packages/$collection-packages.txt"
 	if [ ! -f "$colfile" ]; then
 		echo "Skipping $collection because $colfile does not exist."
 		continue
@@ -30,8 +30,8 @@ for collection in $@; do
 	if [ "$aur_helper" != "" ]; then
 		$aur_helper -Syuv - < "$colfile"
 	else
-		if [ "$collection" == "yay" ]; then
-			echo "Skipping $collection because yay has not been installed."
+		if [ $(echo $collection | grep 'aur' | wc -l) != 0 ]; then
+			echo "Skipping $collection because an AUR helper has not been installed."
 			continue
 		fi
 		pacman -Syuv - < "$colfile"
