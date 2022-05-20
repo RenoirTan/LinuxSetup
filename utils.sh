@@ -77,13 +77,13 @@ lxsp_mv() {
 }
 
 lxspr_rm() {
-	target="$(lxspr_path $1)"
-	[[ -f "$target" || -d "$target" ]] && rm -rf "$target"
+	target="$1"
+	[[ -f "$target" || -d "$target" ]] && rm -r "$target"
 }
 
 lxsp_rm() {
-	target="$HOME/$(lxsp_path $1)"
-	[[ -f "$target" || -d "$target" ]] && rm -rf "$target"
+	target="$HOME/$1"
+	[[ -f "$target" || -d "$target" ]] && rm -r "$target"
 }
 
 lxspr_echof() {

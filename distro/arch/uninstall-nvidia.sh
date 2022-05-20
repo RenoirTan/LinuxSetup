@@ -6,5 +6,5 @@ lxspr_rm /etc/pacman.d/hooks/nvidia.hook
 
 mkinitcpio -P
 
-echo "Restart now for changes to take effect."
-
+echo "Run 'setup.sh distro/arch/disable-nvidia.sh' to remove the nvidia driver."
+echo "Then, restart the computer for the changes to take effect."
