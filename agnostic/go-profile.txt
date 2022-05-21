@@ -1,5 +1,5 @@
 
 # Go
 export GOPATH="$HOME/Code/languages/go"
-[[ -d "$GOPATH/bin" ]] && export PATH="$GOPATH/bin:$PATH"
+[ -d "$GOPATH/bin" ] && export PATH="$GOPATH/bin:$PATH"
 

@@ -1,5 +1,8 @@
 source ../utils.sh
 
-[[ $(lxsp_detect_init systemd) == "1" ]] && systemctl enable --now gpm \
-    || echo -n "systemd not found"
+if [ $(lxsp_detect_init systemd) == "1" ]; then
+    systemctl enable --now gpm
+else
+    echo -n "systemd not found"
+fi
 

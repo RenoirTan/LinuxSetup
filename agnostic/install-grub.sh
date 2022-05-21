@@ -1,8 +1,8 @@
 source ../utils.sh
 
 
-echo "This script assumes that your motherboard supports UEFI."
-echo "If your motherboard does not support UEFI, press Ctrl+C to exit."
+echo "This script assumes that your computer supports UEFI."
+echo "If your computer does not support UEFI, press Ctrl+C to exit."
 
 
 required_exec="grub-install"
@@ -16,17 +16,26 @@ done
 
 echo -n "Where is the EFI partition mounted? (e.g. /boot): "
 read efi_partition
+if [ ! -d $efi_partition ]; then
+    echo "'$efi_partition' does not exist. PLease create that folder first!"
+fi
 echo -n "Do you want to use TPM? (y/n): "
 read use_tpm
+if [ $use_tpm != "y" ] && [ $use_tpm != "n" ]; then
+    echo "Invalid answer"
+    exit 1
+fi
 echo -n "Are you installing GRUB on a removeable medium? (y/n): "
 read use_removeable
+if [ $use_removeable != "y" ] && [ $use_removeable != "n" ]; then
+    echo "Invalid answer"
+    exit 1
+fi
 echo -n "What EFI label do you want to use for GRUB? (GRUB): "
 read bootloader_id
-
-
-if [ "$bootloader_id" == "" ]; then
-    echo "Bootloader ID cannot be empty."
-    exit 1
+if [ -z $bootloader_id ]; then
+    echo "No EFI label given, defaulting to 'GRUB'"
+    bootloader_id="GRUB"
 fi
 
 
@@ -59,5 +68,6 @@ else
     exit 1
 fi
 
+echo "Now generating GRUB config file..."
 grub-mkconfig -o /boot/grub/grub.cfg
-
+echo "Done!"

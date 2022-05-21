@@ -1,3 +1,3 @@
 source ../utils.sh
 
-lxsp_restore .config/easyeffects/input/
+lxsp_restore .config/easyeffects/input/pipewire.json

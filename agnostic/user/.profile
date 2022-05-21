@@ -62,12 +62,14 @@ tlp_watch() {
 add_to_path "$HOME/.local/bin"
 
 # Pyenv
-if command -v pyenv &>/dev/null; then
-    export PYENV_ROOT="$HOME/.pyenv"
-#    add_to_path "$PYENV_ROOT/bin"
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-fi
+export PYENV_ROOT="$HOME/.pyenv"
+activate_pyenv() {
+    if command -v pyenv &>/dev/null; then
+    #    add_to_path "$PYENV_ROOT/bin"
+        eval "$(pyenv init --path)"
+        eval "$(pyenv init -)"
+    fi
+}
 
 # Rust
 export RUST_HOME="$HOME/.rust"

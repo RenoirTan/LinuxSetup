@@ -1,4 +1,4 @@
 source ../utils.sh
 
-lxspr_cp /etc/modprobe.d/nvidia.conf
+lxspr_replace /etc/modprobe.d/nvidia.conf
 
