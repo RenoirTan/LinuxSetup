@@ -19,6 +19,7 @@ if [ "$pacman_installed" != 1 ] && [ "$aur_helper" == "" ]; then
 	echo "No supported package managers found."
 	echo "Please install one of the available package managers for Arch Linux, especially pacman."
 	echo "Supported AUR helpers: yay, paru"
+	exit 1
 fi
 
 for collection in $@; do
