@@ -108,11 +108,19 @@ lxsp_backup() {
 }
 
 lxspr_replace() {
+	src="$(lxspr_path $1)"
+	if [[ ! -f "$src" ]]; then
+		return 0
+	fi
 	lxspr_backup "$1"
 	lxspr_cp "$1"
 }
 
 lxsp_replace() {
+	src="$(lxsp_path $1)"
+	if [[ ! -f "$src" ]]; then
+		return 0
+	fi
 	lxsp_backup "$1"
 	lxsp_cp "$1"
 }
