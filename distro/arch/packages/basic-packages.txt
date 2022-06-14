@@ -10,6 +10,7 @@ htop
 iproute2
 man-db
 man-pages
+mokutil
 neofetch
 neovim
 networkmanager
