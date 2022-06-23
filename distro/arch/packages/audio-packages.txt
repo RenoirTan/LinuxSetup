@@ -1,10 +1,14 @@
 sof-firmware
 alsa
 alsa-firmware
+alsa-plugins
 alsa-ucm-conf
 alsa-utils
+lib32-alsa-lib
+lib32-alsa-plugins
 pipewire
 lib32-pipewire
 wireplumber
 pipewire-alsa
 pipewire-pulse
+lib32-libpulse

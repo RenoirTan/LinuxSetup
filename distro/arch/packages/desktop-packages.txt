@@ -2,3 +2,4 @@ discord
 firefox
 libreoffice-fresh
 gscan2pdf
+pavucontrol
