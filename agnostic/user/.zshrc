@@ -3,30 +3,35 @@
 
 [[ -f "$HOME/.profile" ]] && source "$HOME/.profile"
 
+#export GTK_IM_MODULE=ibus
+#export XMODIFIERS=@im=ibus
+#export QT_IM_MODULE=ibus
+
 erase_history() {
-	local HISTSIZE=0
+	local HISTSIZE="${1:-0}"
     rm -f $HOME/.zsh_history
 }
 
 quit() {
-    erase_history
+    erase_history "$1"
     exit
 }
 
 syntax_highlighting() {
-    source_first \
-        "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
-        "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    source_path "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 }
 
 autosuggestions() {
-    source_first \
-        "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" \
-        "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    source_path "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 }
 
 safe_neofetch() {
     command -v neofetch > /dev/null && neofetch --disable gpu
+}
+
+cat_motd() {
+    [ -f '/etc/motd' ] && cat '/etc/motd'
+    [ -d '/etc/motd.d' ] && cat '/etc/motd.d/'*
 }
 
 # Path to your oh-my-zsh installation.
@@ -37,7 +42,7 @@ export ZSH="/home/renoir/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 export ZL_USER_PROMPTTOKEN=λ
-#export ZSH_THEME=liver
+ZSH_THEME="liver"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -129,6 +134,15 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-safe_neofetch
+_os_name=$(awk -F'=' '/^NAME=/ {print $2}' /etc/*-release | cut -c 2- | rev | cut -c 2- | rev)
+
+if ! tty | grep -E 'tty[0-9]*$' >/dev/null ; then
+    echo '\e[1m\e[1;36m'
+    echo "${_os_name} $(uname -r) ($(tty | cut -c 6-))"
+    echo ''
+    cat_motd
+fi
+echo -n '\e[0m'
+#safe_neofetch
 autosuggestions
 syntax_highlighting
