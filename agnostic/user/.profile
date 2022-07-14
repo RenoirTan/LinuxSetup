@@ -50,13 +50,13 @@ get_elevate() {
     _force=0
     _opterror=0
     while [ $# -gt 0 ]; do
-        if [ $1 = '-h' ] || [ $1 = '--help' ]; then
+        if [[ $1 =~ '^-([hgtf])*h([hgtf])*$' ]] || [ $1 = '--help' ]; then
             _help=1
-        elif [ $1 = '-g' ] || [ $1 = '--gui' ]; then
+        elif [[ $1 =~ '^-([hgtf])*g([hgtf])*$' ]] || [ $1 = '--gui' ]; then
             _gui=1
-        elif [ $1 = '-t' ] || [ $1 = '--terminal' ]; then
+        elif [[ $1 =~ '^-([hgtf])*t([hgtf])*$' ]] || [ $1 = '--terminal' ]; then
             _terminal=1
-        elif [ $1 = '-f' ] || [ $1 = '--force' ]; then
+        elif [[ $1 =~ '^-([hgtf])*f([hgtf])*$' ]] || [ $1 = '--force' ]; then
             _force=1
         else
             _help=1
@@ -70,6 +70,8 @@ get_elevate() {
     fi
     if [ $_gui -eq 1 ] && [ $_terminal -eq 1 ]; then
         echo '\e[31mCannot use --gui and --terminal at the same time\e[0m\n'
+        _help=1
+        _opterror=1
     fi
     if [ $_help -eq 1 ]; then
         echo 'Usage: get_elevate [OPTIONS]'
