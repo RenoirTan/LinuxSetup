@@ -30,6 +30,7 @@ done
 
 echo -n "Where is the EFI partition mounted? "
 read efi_mount
+efi_mount=$(echo $efi_mount | sed -r 's/\/*$//')
 if [ ! -d "$efi_mount" ]; then
     echo "'$efi_mount' could not be found!"
     echo "Are you sure your EFI partition is mounted there?"
@@ -62,7 +63,7 @@ if [ -z "$shim_partition" ]; then
     echo "No partition given. Aborting!"
     exit 1
 fi
-shim_install_dir="$efi_mount/EFI/$shim_label"
+shim_install_dir="$(dirname $grub_efi_file)"
 echo "Shim will be installed under '$shim_install_dir/'."
 echo -n "If this does not clash with other bootloaders, enter 'y': "
 read reply
@@ -73,12 +74,13 @@ fi
 
 
 mkdir -p "$shim_install_dir"
-cp "$shimx64_efi" "$shim_install_dir/shimx64.efi"
+cp "$shimx64_efi" "$shim_install_dir/BOOTx64.EFI"
 cp "$mmx64_efi" "$shim_install_dir/mmx64.efi"
 
+efi_shim_relpath=$(echo "$shim_install_dir/BOOTx64.EFI" | sed -r "s|^$efi_mount||")
 
 efibootmgr --verbose --disk "$shim_drive" --part "$shim_partition" \
-    --create --label "$shim_label" --loader "$shim_install_dir/shimx64.efi"
+    --create --label "$shim_label" --loader "$efi_shim_relpath"
 
 
 find /boot/ -maxdepth 1 -name 'vmlinuz-*' -exec sh -c "sbsign --key $mok_key --cert $mok_crt --output {} {}" ";"
