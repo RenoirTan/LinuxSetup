@@ -60,6 +60,13 @@ CD_MODULES="
 	zfsinfo
 	"
 
+# not found: linuxefi
+CD_MODULES="$CD_MODULES
+	cpuid
+	play
+	tpm
+	"
+
 GRUB_MODULES="$CD_MODULES
 	cryptodisk
 	gcry_arcfour
