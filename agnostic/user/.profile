@@ -131,6 +131,26 @@ tlp_watch() {
     ${__elevate} watch -n 1 tlp-stat -b
 }
 
+nbfc_watch() {
+    __elevate=$(get_elevate)
+    if [ $? -ne 0 ]; then
+        echo ${__elevate}
+        return 1
+    fi
+
+    if ! command -v watch &>/dev/null; then
+        echo "watch not found"
+        return 1
+    fi
+
+    if ! command -v nbfc &>/dev/null; then
+        echo "nbfc not found"
+        return 1
+    fi
+
+    ${__elevate} watch -n 1 nbfc status --all
+}
+
 paru_do() {
     if ! command -v paru &>/dev/null; then
         echo "paru not found"
@@ -146,7 +166,7 @@ paru_do() {
         base_opt=''
     fi
 
-    __elevate=$(get_elevate)
+    __elevate=$(get_elevate --terminal)
     if [ $? -ne 0 ]; then
         echo ${__elevate}
         return 1
@@ -170,8 +190,10 @@ add_to_path "$HOME/.local/bin"
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 activate_pyenv() {
+    if [ -d "$PYENV_ROOT/bin" ]; then
+        add_to_path "$PYENV_ROOT/bin"
+    fi
     if command -v pyenv &>/dev/null; then
-    #    add_to_path "$PYENV_ROOT/bin"
         eval "$(pyenv init --path)"
         eval "$(pyenv init -)"
     fi
@@ -198,6 +220,12 @@ export WINEPREFIX="$WINE_BOTTLE_PATH/General"
 export SDKMAN_DIR="$HOME/.sdkman"
 activate_sdkman() {
     [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+}
+
+# npm
+activate_npm() {
+    export NODE_PATH="$HOME/.local/lib/node_modules:$NODE_PATH"
+    export npm_config_prefix="$HOME/.local"
 }
 
 export PATH
