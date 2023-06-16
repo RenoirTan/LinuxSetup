@@ -1,5 +1,4 @@
 sof-firmware
-alsa
 alsa-firmware
 alsa-plugins
 alsa-ucm-conf
