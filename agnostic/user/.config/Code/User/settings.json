@@ -1,10 +1,12 @@
 {
     "atomKeymap.promptV3Features": true,
     "editor.fontFamily": "JetBrains Mono",
+    "editor.fontWeight": 500,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.formatOnPaste": true,
-    "editor.cursorStyle": "line",
+    "editor.cursorStyle": "underline",
     "editor.cursorWidth": 4,
+    "editor.cursorBlinking": "smooth",
     "editor.renderControlCharacters": true,
     "editor.rulers": [80, 88, 100],
     "editor.suggestSelection": "first",
@@ -22,19 +24,26 @@
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "files.exclude": {
         "**/.classpath": false,
+        "**/.DS_Store": false,
+        "**/.factorypath": false,
+        "**/.git": false,
+        "**/.hg": false,
         "**/.project": false,
         "**/.settings": false,
-        "**/.factorypath": false,
-        "**/.git": false
+        "**/.svn": false,
+        "**/CVS": false,
+        "**/Thumbs.db": false
+    },
+    "files.readonlyInclude": {
+        "/.cargo/registry/src/**/*.rs": true,
+        "/lib/rustlib/src/rust/library/**/*.rs": true,
     },
     "java.semanticHighlighting.enabled": true,
     "python.languageServer": "Pylance",
     "rust-client.channel": "stable",
     "go.formatTool": "goimports",
-    "C_Cpp.updateChannel": "Insiders",
     "diffEditor.codeLens": true,
-    "cmake.configureOnOpen": true,
-    "terminal.integrated.fontFamily": "JetBrains Mono ExtraBold",
+    "cmake.configureOnOpen": false,
     "rust-client.engine": "rls",
     "rust-analyzer.cargo.allFeatures": true,
     "rust-analyzer.inlayHints.enable": false,
@@ -43,10 +52,11 @@
     },
     "kite.showWelcomeNotificationOnStartup": false,
     "[go]": {
-        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
         "editor.formatOnSave": false,
         "editor.codeActionsOnSave": {
-            "source.organizeImports": true
+            // "source.organizeImports": true
         }
     },
     "files.watcherExclude": {
@@ -70,7 +80,6 @@
     },
     "glassit.alpha": 215,
     "terminal.integrated.tabs.enabled": true,
-    "workbench.editor.untitled.hint": "hidden",
     "workbench.startupEditor": "welcomePage",
     "editor.fontLigatures": true,
     "codesnap.backgroundColor": "#ffffff00",
@@ -80,11 +89,11 @@
         "*.txt": "plaintext",
         "*.html": "html",
         "*.prolog": "prolog",
-        "*.make": "makefile"
+        "*.make": "makefile",
+        "*.install": "shellscript",
+        "*.json": "jsonc"
     },
     "java.project.importHint": false,
-    "workbench.iconTheme": "helium-icon-theme",
-    "workbench.productIconTheme": "fluent-icons",
     "codespaces.accountProvider": "Uninitialized",
     "editor.suggest.preview": true,
     "glassit.step": 8,
@@ -94,6 +103,18 @@
         "gitlens.codeLens.scopes": [
             "document"
         ]
+    },
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[vue]": {
+        "editor.tabSize": 2
+    },
+    "[typescript]": {
+        "editor.tabSize": 2
+    },
+    "[typescriptreact]": {
+        "editor.tabSize": 2
     },
     "editor.wordWrap": "on",
     "better-comments.tags": [
@@ -145,18 +166,16 @@
     ],
     "editor.inlineSuggest.enabled": true,
     "redhat.telemetry.enabled": false,
-    /*
     "java.configuration.runtimes": [
         {
             "name": "JavaSE-1.8",
-            "path": "/home/renoir/.sdkman/candidates/java/8.0.312-tem",
+            "path": "/home/renoir/.sdkman/candidates/java/8.0.312-tem"
         },
         {
             "name": "JavaSE-17",
-            "path": "/home/renoir/.sdkman/candidates/java/17.0.1-tem",
+            "path": "/home/renoir/.sdkman/candidates/java/17.0.1-tem"
         }
     ],
-    */
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
@@ -165,11 +184,52 @@
         "gitlens.codeLens.symbolScopes": [
             "!Module"
         ],
-        "editor.wordBasedSuggestions": false
+        "editor.wordBasedSuggestions": "off"
     },
-    "workbench.colorTheme": "Liver Dark Full",
-    "editor.fontSize": 16,
     "workbench.enableExperiments": false,
     "workbench.settings.enableNaturalLanguageSearch": false,
     "update.mode": "manual",
+    "cmake.configureOnEdit": false,
+    "codesnap.realLineNumbers": true,
+    "scm.inputFontSize": 12,
+    "python.defaultInterpreterPath": "/usr/bin/python",
+    "rust-analyzer.cargo.noSysroot": true,
+    "rust-analyzer.inlayHints.parameterHints.enable": false,
+    "rust-analyzer.inlayHints.renderColons": false,
+    "rust-analyzer.inlayHints.typeHints.enable": false,
+    "window.titleBarStyle": "custom",
+    "window.commandCenter": true,
+    "vs-kubernetes": {
+        "vscode-kubernetes.minikube-path.linux": "/home/renoir/.local/state/vs-kubernetes/tools/minikube/linux-amd64/minikube"
+    },
+    "ruby.useBundler": true, //run non-lint commands with bundle exec
+    "ruby.useLanguageServer": true, // use the internal language server (see below)
+    "ruby.lint": {
+        "rubocop": {
+            "useBundler": true // enable rubocop via bundler
+        },
+        "reek": {
+            "useBundler": true // enable reek via bundler
+        }
+    },
+    "ruby.format": "rubocop",
+    "ruby.intellisense": "rubyLocate",
+    "ruby.codeCompletion": "rcodetools",
+    "[jade]": {
+        "editor.tabSize": 2
+    },
+    "rust-analyzer.trace.server": "messages",
+    "window.zoomLevel": 1,
+    "editor.bracketPairColorization.enabled": false,
+    "workbench.editor.empty.hint": "hidden",
+    "gitlens.ai.experimental.provider": "openai",
+    "codesnap.boxShadow": "rgba(0, 0, 0, 0.55) 0px 0px 68px",
+    "cmake.pinnedCommands": [
+        "workbench.action.tasks.configureTaskRunner",
+        "workbench.action.tasks.runTask"
+    ],
+    "workbench.iconTheme": "helium-icon-theme",
+    "workbench.productIconTheme": "fluent-icons",
+    "workbench.colorTheme": "Liver Dark Full",
+    "zig.zls.enabled": "on"
 }

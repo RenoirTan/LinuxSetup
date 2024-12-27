@@ -73,6 +73,18 @@ get_elevate() {
         _help=1
         _opterror=1
     fi
+
+    # 0: GUI
+    # 1: Terminal
+    _default_type=0
+    if [[ $GET_ELEVATE =~ '^[01]$' ]]; then
+        _default_type=$GET_ELEVATE
+    elif [ ! -z $GET_ELEVATE ]; then
+        echo '\e[31mVariable GET_ELEVATE must be '0', '1' or empty.\e[0m\n'
+        _help=1
+        _opterror=1
+    fi
+
     if [ $_help -eq 1 ]; then
         echo 'Usage: get_elevate [OPTIONS]'
         echo 'OPTIONS:'
@@ -80,14 +92,20 @@ get_elevate() {
         echo '  -g, --gui      -> Only search for GUI options'
         echo '  -t, --terminal -> Only search for terminal-safe options'
         echo '  -f, --force    -> Force search filters'
+        echo ''
+        echo 'ENVIRONMENT VARIABLES:'
+        echo '  GET_ELEVATE    -> Set what kind of permission elevator to'
+        echo '                 -> choose by default.'
+        echo '                 -> 0 for GUI,'
+        echo '                 -> 1 for terminal.'
         return $_opterror
     fi
 
     _do_gui=0
-    [ ! -z $DISPLAY ] && [ $_terminal -eq 0 ] && _do_gui=1
-    [ $_gui -eq 1 ] && [ $_force -eq 1 ] && _do_gui=1
+    [ ! -z $DISPLAY ] && [ $_default_type -eq 0 ] && [ $_terminal -eq 0 ] && _do_gui=1
+    [ $_gui -eq 1 ] && [ ! -z $DISPLAY ] || [ $_force -eq 1 ] && _do_gui=1
     _do_term=0
-    [ $_gui -eq 0 ] && _do_term=1
+    [ $_gui -eq 0 ] || [ $_default_type -eq 1 ] && _do_term=1
     [ $_terminal -eq 1 ] && [ $_force -eq 1 ] && _do_term=1
 
     elevate=''
@@ -166,7 +184,7 @@ paru_do() {
         base_opt=''
     fi
 
-    __elevate=$(get_elevate --terminal)
+    __elevate=$(get_elevate)
     if [ $? -ne 0 ]; then
         echo ${__elevate}
         return 1
@@ -199,6 +217,11 @@ activate_pyenv() {
     fi
 }
 
+# Pipx
+activate_pipx() {
+    eval "$(register-python-argcomplete pipx)"
+}
+
 # Rust
 export RUST_HOME="$HOME/.rust"
 export RUSTUP_HOME="$RUST_HOME/rustup"
@@ -212,9 +235,11 @@ export GOPATH="$HOME/Code/languages/go"
 add_to_path "$GOPATH/bin"
 
 # Wine
-export WINE_BOTTLE_PATH="$HOME/Wine"
-export WINEARCH="win64"
-export WINEPREFIX="$WINE_BOTTLE_PATH/General"
+activate_wine_general() {
+    export WINE_BOTTLE_PATH="$HOME/Wine"
+    export WINEARCH="win64"
+    export WINEPREFIX="$WINE_BOTTLE_PATH/General"
+}
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -228,11 +253,46 @@ activate_npm() {
     export npm_config_prefix="$HOME/.local"
 }
 
+# Ruby
+activate_ruby() {
+    export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+    add_to_path "$GEM_HOME/bin"
+    export PATH
+}
+
+# Rbenv
+activate_rbenv() {
+    eval "$(~/.rbenv/bin/rbenv init - zsh)"
+}
+
+# Jupyter
+activate_jupyter() {
+    export JUPYTERLAB_DIR=$HOME/.local/share/jupyter/lab
+}
+
+# OCaml
+activate_ocaml() {
+    eval $(opam env)
+}
+
+# R
+activate_rlang() {
+    export R_LIBS_USER="${XDG_DATA_HOME:-$HOME/.local/share}/R/%p-library/%v"
+}
+
+# Haskell
+activate_ghcup() {
+    [ -f "/home/renoir/.ghcup/env" ] && . "/home/renoir/.ghcup/env" # ghcup-env
+}
+
 export PATH
 
+export GET_ELEVATE=1
 export EDITOR="nvim"
 export MAKEFLAGS="-j8"
 export REMOTE_DIR="$HOME/Code/remote"
 export GITHUB_DIR="$REMOTE_DIR/github.com"
 export MY_GITHUB_DIR="$GITHUB_DIR/RenoirTan"
 export LINUX_SCM_DIR="$REMOTE_DIR/git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux"
+
+activate_wine_general
