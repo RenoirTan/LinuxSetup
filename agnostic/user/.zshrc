@@ -41,7 +41,25 @@ export ZSH="/home/renoir/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+#export ZL_LEFTUPBEGIN=┌
+#export ZL_LEFTDOWNBEGIN=└
+#export ZL_RIGHTUPBEGIN=┐
+export ZL_RIGHTDOWNBEGIN=─┘
+export ZL_USERNAME_ICON=󱗆
+export ZL_HOSTNAME_ICON=󱓟
+export ZL_PATH_ICON=󰞁
+#export ZL_VCSSYSTEM_ICON=
+#export ZL_VCSBRANCH_ICON=
+#export ZL_VCSPATH_ICON=
+#export ZL_VCSMETA_ICON=󱔢
 export ZL_USER_PROMPTTOKEN=λ
+#export ZL_SEGMENTLEFT='['
+#export ZL_SEGMENTRIGHT=']'
+#export ZL_PROMPTPOINTER=󰈸
+#export ZL_VCSSYSTEM_DEC="$(zl_make_decoration 197 ! !)"
+#export ZL_VCSBRANCH_DEC="$(zl_make_decoration 214 ! ! )" 
+#export ZL_VCSPATH_DEC="$(zl_make_decoration 46 ! ! )"
+#export ZL_VCSMETA_DEC="$(zl_make_decoration 62 ! !)"
 ZSH_THEME="liver"
 
 # Set list of themes to pick from when loading at random
